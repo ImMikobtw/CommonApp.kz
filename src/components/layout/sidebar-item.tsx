@@ -28,7 +28,6 @@ export function SidebarItem({ item }: Props) {
           : "text-surface-500 hover:bg-surface-200/50 hover:text-surface-900"
       )}
     >
-      {/* Active Indicator Bar */}
       {isActive && (
         <span className="absolute left-0 top-1/2 -translate-y-1/2 h-6 w-1 rounded-r-full bg-brand-primary" />
       )}
