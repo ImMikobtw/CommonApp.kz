@@ -31,8 +31,11 @@ export default function RegisterPage() {
   const onSubmit = async (values: RegisterFormValues) => {
     setIsLoading(true);
     try {
-      const response = await authService.register(values);
-      tokenStorage.set(response.access_token);
+      const response = await authService.register({
+        ...values,
+        role: "MODERATOR",
+      });
+      tokenStorage.set(response.access_token, response.refresh_token);
       toast.success("Successfully registered!");
       router.push("/dashboard");
     } catch (error: any) {

@@ -31,7 +31,7 @@ export default function LoginPage() {
     setIsLoading(true);
     try {
       const response = await authService.login(values);
-      tokenStorage.set(response.access_token);
+      tokenStorage.set(response.access_token, response.refresh_token);
       toast.success("Successfully logged in!");
       router.push("/dashboard");
     } catch (error: any) {

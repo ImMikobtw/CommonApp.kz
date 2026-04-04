@@ -28,12 +28,22 @@ export const dashboardNavItems: NavItem[] = [
     icon: University,
   },
   {
+    title: "Specialties",
+    href: "/specialties",
+    icon: BookOpen,
+  },
+  {
     title: "Programs",
     href: "/programs",
     icon: GraduationCap,
   },
   {
-    title: "Requirements",
+    title: "Users",
+    href: "/users",
+    icon: Users,
+  },
+  {
+    title: "Suggestions",
     href: "/requirements",
     icon: ScrollText,
   },

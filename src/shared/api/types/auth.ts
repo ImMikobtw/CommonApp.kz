@@ -4,22 +4,27 @@ export interface LoginParams {
 }
 
 export interface RegisterParams {
-  full_name: string;
+  name?: string;
+  full_name?: string;
   email: string;
   password: string;
+  role?: string;
 }
 
 export interface User {
   id: number;
+  name?: string;
   full_name: string;
   email: string;
   role: string;
-  status: string;
+  status?: string;
   phone?: string | null;
+  universityId?: number | null;
 }
 
 export interface AuthResponse {
   access_token: string;
+  refresh_token: string;
   token_type: string;
 }
 

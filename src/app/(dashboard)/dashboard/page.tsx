@@ -1,15 +1,44 @@
+"use client";
+
 import { Card } from "../../../components/ui/card";
 import { PageHeader } from "../../../components/ui/page-header";
 import { University, FileText, FolderKanban, GitCompareArrows } from "lucide-react";
-
-const stats = [
-  { title: "Universities", value: "12", icon: University, color: "text-indigo-600", bg: "bg-indigo-50" },
-  { title: "Documents", value: "84", icon: FileText, color: "text-blue-600", bg: "bg-blue-50" },
-  { title: "Parse Sessions", value: "19", icon: FolderKanban, color: "text-violet-600", bg: "bg-violet-50" },
-  { title: "Pending Suggestions", value: "7", icon: GitCompareArrows, color: "text-sky-600", bg: "bg-sky-50" },
-];
+import { useDashboardStats } from "./use-dashboard-stats";
 
 export default function DashboardPage() {
+  const { data, isLoading } = useDashboardStats();
+
+  const stats = [
+    { 
+      title: "Universities", 
+      value: isLoading ? "..." : data?.universities.toString() || "0", 
+      icon: University, 
+      color: "text-indigo-600", 
+      bg: "bg-indigo-50" 
+    },
+    { 
+      title: "Specialties", 
+      value: isLoading ? "..." : data?.specialties.toString() || "0", 
+      icon: FolderKanban, 
+      color: "text-blue-600", 
+      bg: "bg-blue-50" 
+    },
+    { 
+      title: "Programs", 
+      value: isLoading ? "..." : data?.programs.toString() || "0", 
+      icon: GitCompareArrows, 
+      color: "text-violet-600", 
+      bg: "bg-violet-50" 
+    },
+    { 
+      title: "Documents", 
+      value: isLoading ? "..." : data?.documents.toString() || "0", 
+      icon: FileText, 
+      color: "text-sky-600", 
+      bg: "bg-sky-50" 
+    },
+  ];
+
   return (
     <div className="space-y-10">
       <PageHeader

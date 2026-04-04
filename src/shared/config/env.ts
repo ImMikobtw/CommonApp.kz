@@ -4,10 +4,10 @@ const requiredEnv = {
 
 for (const [key, value] of Object.entries(requiredEnv)) {
     if (!value) {
-        console.warn(`Missing environment variable: ${key}`);
+        throw new Error(`Missing environment variable: ${key}`);
     }
 }
 
 export const env = {
-    apiUrl: process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000"
+    apiUrl: process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000/api"
 };

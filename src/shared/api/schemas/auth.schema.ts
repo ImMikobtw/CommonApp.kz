@@ -11,6 +11,7 @@ export const registerSchema = z.object({
   full_name: z.string().trim().min(2, "Name must be at least 2 characters"),
   email: z.string().trim().toLowerCase().email("Invalid email address"),
   password: z.string().min(6, "Password must be at least 6 characters"),
+  role: z.string().optional(),
 });
 
 export type RegisterFormValues = z.infer<typeof registerSchema>;

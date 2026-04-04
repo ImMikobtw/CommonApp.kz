@@ -13,7 +13,7 @@ export function useAuth() {
   const loginMutation = useMutation({
     mutationFn: (payload: LoginPayload) => login(payload),
     onSuccess: (data) => {
-      tokenStorage.set(data.access_token);
+      tokenStorage.set(data.access_token, data.refresh_token);
       toast.success("Successfully signed in");
       router.push("/dashboard");
     },
