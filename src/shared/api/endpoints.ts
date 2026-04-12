@@ -23,6 +23,10 @@ export const endpoints = {
   dashboard: {
     stats: "/dashboard/stats",
   },
+  documents: {
+    list: "/documents",
+    upload: "/documents/upload",
+  },
   users: {
     list: "/users",
     create: "/users",
