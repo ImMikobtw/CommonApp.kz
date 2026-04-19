@@ -12,7 +12,8 @@ import { Button } from "../../../components/ui/button";
 import { PageHeader } from "../../../components/ui/page-header";
 import { Dialog } from "../../../components/ui/dialog";
 import { UniversityForm } from "../../../features/university/components/university-form";
-import { University, Edit2, Trash2, Globe, MapPin } from "lucide-react";
+import { UniversitySpecialtiesManager } from "../../../features/university/components/university-specialties-manager";
+import { University, Edit2, Trash2, Globe, MapPin, GraduationCap } from "lucide-react";
 import { University as IUniversity } from "../../../shared/api/services/university.service";
 
 export default function UniversitiesPage() {
@@ -23,6 +24,7 @@ export default function UniversitiesPage() {
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingUniversity, setEditingUniversity] = useState<IUniversity | null>(null);
+  const [managingSpecialtiesFor, setManagingSpecialtiesFor] = useState<IUniversity | null>(null);
 
   const handleCreate = () => {
     setEditingUniversity(null);
@@ -118,6 +120,13 @@ export default function UniversitiesPage() {
             </a>
           )}
           <button 
+            onClick={() => setManagingSpecialtiesFor(item)}
+            className="p-2 text-zinc-400 hover:text-emerald-600 hover:bg-emerald-50 rounded-xl transition-all"
+            title="Manage Specialties"
+          >
+            <GraduationCap className="h-4 w-4" />
+          </button>
+          <button 
             onClick={() => handleEdit(item)}
             className="p-2 text-zinc-400 hover:text-indigo-600 hover:bg-indigo-50 rounded-xl transition-all"
             title="Edit"
@@ -170,6 +179,16 @@ export default function UniversitiesPage() {
           submitLabel={editingUniversity ? "Update University" : "Create University"}
         />
       </Dialog>
+      
+      {managingSpecialtiesFor && (
+        <Dialog
+          isOpen={true}
+          onClose={() => setManagingSpecialtiesFor(null)}
+          title={`Specialties for ${managingSpecialtiesFor.abbrRu || managingSpecialtiesFor.nameRu}`}
+        >
+          <UniversitySpecialtiesManager universityId={managingSpecialtiesFor.id} />
+        </Dialog>
+      )}
     </div>
   );
 }

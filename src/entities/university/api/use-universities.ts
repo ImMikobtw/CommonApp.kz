@@ -76,3 +76,43 @@ export function useDeleteUniversity() {
     },
   });
 }
+
+export function useUniversitySpecialties(id: number) {
+  return useQuery({
+    queryKey: [...universityKeys.details(id), "specialties"],
+    queryFn: () => universityService.getSpecialties(id),
+    enabled: !!id,
+  });
+}
+
+export function useLinkSpecialty() {
+  const queryClient = useQueryClient();
+  
+  return useMutation({
+    mutationFn: ({ universityId, specialtyId }: { universityId: number; specialtyId: number }) => 
+      universityService.linkSpecialty(universityId, specialtyId),
+    onSuccess: (_, { universityId }) => {
+      queryClient.invalidateQueries({ queryKey: [...universityKeys.details(universityId), "specialties"] });
+      // toast.success("Specialty linked successfully");
+    },
+    onError: (error: Error | any) => {
+      toast.error((error as any).response?.data?.message || "Failed to link specialty");
+    },
+  });
+}
+
+export function useUnlinkSpecialty() {
+  const queryClient = useQueryClient();
+  
+  return useMutation({
+    mutationFn: ({ universityId, specialtyId }: { universityId: number; specialtyId: number }) => 
+      universityService.unlinkSpecialty(universityId, specialtyId),
+    onSuccess: (_, { universityId }) => {
+      queryClient.invalidateQueries({ queryKey: [...universityKeys.details(universityId), "specialties"] });
+      // toast.success("Specialty unlinked successfully");
+    },
+    onError: (error: Error | any) => {
+      toast.error((error as any).response?.data?.message || "Failed to unlink specialty");
+    },
+  });
+}
