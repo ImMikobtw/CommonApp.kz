@@ -88,7 +88,7 @@ export default function ProgramsPage() {
             {item.degree}
           </span>
           <div className="flex gap-1">
-            {item.languages.map((lang) => (
+            {item.languages?.map((lang) => (
               <span key={lang} className="text-[8px] font-bold text-zinc-400 uppercase">{lang}</span>
             ))}
           </div>
