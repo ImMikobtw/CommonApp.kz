@@ -67,9 +67,4 @@ export const dashboardNavItems: NavItem[] = [
     href: "/knowledge-base",
     icon: BookOpen,
   },
-  {
-    title: "Users",
-    href: "/users",
-    icon: Users,
-  },
 ];
